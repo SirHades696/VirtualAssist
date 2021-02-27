@@ -1,5 +1,5 @@
 # VirtualAssist
-A easy virtual assist with python
+A easy and simple virtual assist with python
 
 # Resources
 https://pypi.org/project/PyAudio/
