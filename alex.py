@@ -3,7 +3,6 @@ import pyttsx3 as sp
 import pywhatkit as kit 
 import wikipedia as wiki
 from datetime import datetime
-import time 
 
 class Alex():
     def __init__(self, text):
@@ -12,8 +11,9 @@ class Alex():
         self.engine = sp.init()
         voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', voices[0].id)
-        self.engine.setProperty('rate', 125)
+        self.engine.setProperty('rate', 130)
         self.time = datetime.now()
+        wiki.set_lang("es") 
         self.stop_actions = [' parar', ' para', ' deten', ' detente', ' termina', ' finaliza', ' stop']
 
     def current_date(self,date):
@@ -48,7 +48,6 @@ class Alex():
         return voice_command
 
     def virtual_assist(self, text):
-
         command = self.listening(text)
         if 'reproduce' in command:
             music = command.replace('reproduce', '')
@@ -64,8 +63,7 @@ class Alex():
             self.talking_alex('Buscando en google ' + word )
             kit.search(word)
 
-        elif 'wikipedia' in command:
-            wiki.set_lang("es")  
+        elif 'wikipedia' in command: 
             word = command.replace('busca en wikipedia', '')
             text += 'Buscando en wikipedia ' + word + '\n'
             self.text.setText(text)
@@ -97,7 +95,14 @@ class Alex():
             self.text.setText(text)
             self.talking_alex('Deteniendo el servicio de Alex')
             exit()
-
+        elif 'como estas' in command:
+            text += 'Estoy muy bien, gracias por preguntarlo'
+            self.text.setText(text)
+            self.talking_alex('Estoy muy bien, gracias por preguntarlo')
+        elif 'hola' in command:
+            text += 'Hola, espero que estes bien, ten un lindo día.'
+            self.text.setText(text)
+            self.talking_alex('Hola, espero que estes bien, ten un lindo día.')
         else:
             text += 'No entendi tu petición\n'
             self.text.setText(text)
